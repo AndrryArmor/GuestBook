@@ -1,5 +1,10 @@
-<template>HelloWorld</template>
+<template>Hello world</template>
 
-<script></script>
+<script>
+export default {
+  name: "GuestBook",
+  components: {},
+};
+</script>
 
 <style scoped></style>

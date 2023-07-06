@@ -13,4 +13,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+body.body {
+  background-color: tan;
+}
+</style>
