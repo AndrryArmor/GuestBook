@@ -1,9 +1,15 @@
-<template>Hello world</template>
+<template>
+  <GuestBookAddCommentForm />
+</template>
 
 <script>
+import GuestBookAddCommentForm from "./GuestBookAddCommentForm.vue";
+
 export default {
   name: "GuestBook",
-  components: {},
+  components: {
+    GuestBookAddCommentForm,
+  },
 };
 </script>
 
