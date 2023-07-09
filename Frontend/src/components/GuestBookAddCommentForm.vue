@@ -48,11 +48,31 @@ export default {
       this.isAddCommentFormActive = !this.isAddCommentFormActive;
     },
     onCommentSubmit() {
-      alert(`Your name is ${this.authorName} and your comment is ${this.comment}.`);
+      this.postComment();
     },
     onCommentReset() {
       this.authorName = "";
       this.comment = "";
+    },
+    async postComment() {
+      try {
+        const response = await fetch("https://localhost:7023/api/guest-book/comments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userName: this.authorName,
+            publicationDate: new Date(Date.now()),
+            comment: this.comment,
+          }),
+        });
+        if (!response.ok) {
+          throw new Error("Error while posting comment.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

@@ -19,7 +19,7 @@ namespace GuestBook.Controllers
             return _guestBookService.GetUserComments();
         }
 
-        [HttpPost("add")]
+        [HttpPost()]
         public void AddComment([FromBody] UserComment userComment)
         {
             _guestBookService.AddUserComment(userComment);
