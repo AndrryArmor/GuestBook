@@ -3,10 +3,10 @@
     <div class="row row-cols-1 g-1 justify-content-center">
       <GuestBookAddCommentForm />
       <GuestBookComment
-        v-for="i in 6"
-        :authorName="authorName"
-        :publicationDate="publicationDate"
-        :comment="comment"
+        v-for="userComment in userComments"
+        :authorName="userComment.userName"
+        :publicationDate="userComment.publicationDate"
+        :comment="userComment.comment"
       />
     </div>
   </div>
@@ -25,11 +25,26 @@ export default {
 
   data() {
     return {
-      authorName: "Author",
-      publicationDate: new Date(),
-      comment:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      userComments: [],
     };
+  },
+
+  mounted() {
+    this.getAllComments();
+  },
+
+  methods: {
+    async getAllComments() {
+      try {
+        const response = await fetch("https://localhost:7023/api/guest-book/comments");
+        if (!response.ok) {
+          throw new Error("Error fetching comments.");
+        }
+        this.userComments = await response.json();
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

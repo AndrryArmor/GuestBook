@@ -12,14 +12,15 @@ export default {
   name: "GuestBookComment",
   props: {
     authorName: String,
-    publicationDate: Date,
+    publicationDate: String,
     comment: String,
   },
 
   computed: {
     publicationDateString() {
-      let time = this.publicationDate.toLocaleTimeString([], {timeStyle: "short"});
-      let date = this.publicationDate.toLocaleDateString();
+      let dateTime = new Date(this.publicationDate);
+      let time = dateTime.toLocaleTimeString([], {timeStyle: "short"});
+      let date = dateTime.toLocaleDateString();
       return `${time} ${date}`;
     },
   },

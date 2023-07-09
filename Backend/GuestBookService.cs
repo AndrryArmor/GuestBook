@@ -18,6 +18,7 @@
                 {
                     Id = i,
                     UserName = SampleUserName,
+                    PublicationDate = DateTime.Now,
                     Comment = SampleComment
                 });
             }
