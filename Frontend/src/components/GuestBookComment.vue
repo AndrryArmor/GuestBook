@@ -18,8 +18,10 @@ export default {
 
   computed: {
     publicationDateString() {
-      let dateTime = new Date(this.publicationDate);
-      let time = dateTime.toLocaleTimeString([], {timeStyle: "short"});
+      // Z specifies that the date is in UTC format
+      let dateTime = new Date(this.publicationDate + "Z");
+      // Time in HH:mm format
+      let time = dateTime.toLocaleTimeString([], { timeStyle: "short"});
       let date = dateTime.toLocaleDateString();
       return `${time} ${date}`;
     },

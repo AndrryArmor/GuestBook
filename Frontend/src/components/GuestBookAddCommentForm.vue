@@ -5,7 +5,7 @@
     </button>
     <template v-else>
       <h5 class="mb-2">New comment</h5>
-      <form @submit="onCommentSubmit" @reset="onCommentReset" class="row g-2">
+      <form @submit.prevent="onCommentSubmit" @reset="onCommentReset" class="row g-2">
         <div class="col-12" style="max-width: 15rem">
           <label for="comment-name" class="form-label">Your name</label>
           <input type="text" v-model="authorName" class="form-control" id="comment-name" />
@@ -63,13 +63,13 @@ export default {
           },
           body: JSON.stringify({
             userName: this.authorName,
-            publicationDate: new Date(Date.now()),
             comment: this.comment,
           }),
         });
         if (!response.ok) {
           throw new Error("Error while posting comment.");
         }
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }

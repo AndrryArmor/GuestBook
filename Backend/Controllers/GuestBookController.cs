@@ -1,3 +1,4 @@
+using GuestBook.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuestBook.Controllers
@@ -6,20 +7,20 @@ namespace GuestBook.Controllers
     [Route("api/guest-book/comments")]
     public class GuestBookController : ControllerBase
     {
-        private readonly GuestBookService _guestBookService;
+        private readonly IGuestBookService _guestBookService;
 
-        public GuestBookController()
+        public GuestBookController(IGuestBookService guestBookService)
         {
-            _guestBookService = new GuestBookService();
+            _guestBookService = guestBookService;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public IEnumerable<UserComment> GetAllComments()
         {
             return _guestBookService.GetUserComments();
         }
 
-        [HttpPost()]
+        [HttpPost]
         public void AddComment([FromBody] UserComment userComment)
         {
             _guestBookService.AddUserComment(userComment);

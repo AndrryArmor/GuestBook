@@ -1,3 +1,6 @@
+using GuestBook.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace GuestBook
 {
     public class Program
@@ -7,6 +10,9 @@ namespace GuestBook
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddScoped<IGuestBookService, GuestBookService>();
+            builder.Services.AddSqlServer<GuestBookDbContext>(builder.Configuration.GetConnectionString("GuestBook"));
 
             builder.Services.AddCors(options =>
             {
