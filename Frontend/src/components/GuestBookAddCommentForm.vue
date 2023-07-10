@@ -5,26 +5,40 @@
     </button>
     <template v-else>
       <h5 class="mb-2">New comment</h5>
-      <form @submit.prevent="submitForm" @reset="resetForm" class="row g-2">
-        <fieldset class="col-12" style="max-width: 15rem">
-          <label for="comment-name" class="form-label">Your name</label>
+      <form @submit.prevent="submitForm" @reset="resetForm" class="row g-2" novalidate>
+        <fieldset class="col-12">
+          <label for="comment-author" class="form-label">Your name</label>
           <input
             type="text"
             v-model="authorName"
-            id="comment-name"
             class="form-control"
+            :class="applyValidityClass(v$.authorName)"
+            id="comment-author"
+            style="max-width: 15rem"
             :readonly="isPostingComment"
           />
+          <div class="invalid-feedback">
+            <div v-for="error of v$.authorName.$errors" :key="error.$uid">
+              <small>{{ error.$message }}</small>
+            </div>
+          </div>
         </fieldset>
         <fieldset class="col-12">
           <label for="comment-text" class="form-label">Comment</label>
           <textarea
             v-model="comment"
-            id="comment-text" 
             class="form-control"
+            :class="applyValidityClass(v$.comment)"
+            id="comment-text"
             rows="3"
+            maxlength="4000"
             :readonly="isPostingComment"
           ></textarea>
+          <div class="invalid-feedback">
+            <div v-for="error of v$.comment.$errors" :key="error.$uid">
+              <small>{{ error.$message }}</small>
+            </div>
+          </div>
         </fieldset>
         <fieldset :disabled="isPostingComment" class="col-12">
           <div class="row row-cols-auto g-2">
@@ -48,9 +62,15 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
+import { helpers, required, minLength } from "@vuelidate/validators";
+
 export default {
   name: "GuestBookAddCommentForm",
 
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       authorName: "",
@@ -59,15 +79,36 @@ export default {
       isPostingComment: false,
     };
   },
+  validations() {
+    return {
+      authorName: {
+        required: helpers.withMessage("Author name must not be empty.", required),
+        minLength: helpers.withMessage(
+          ({ $params }) => `Author name must be at least ${$params.min} characters long.`,
+          minLength(3)
+        ),
+      },
+      comment: {
+        required: helpers.withMessage("Comment must not be empty.", required),
+        minLength: helpers.withMessage(
+          ({ $params }) => `Comment must be at least ${$params.min} characters long.`,
+          minLength(10)
+        ),
+      },
+    };
+  },
 
   methods: {
     async submitForm() {
+      this.v$.$touch();
+      if (this.v$.$invalid) return;
+
       this.isPostingComment = true;
       let isSucceded = await this.postComment();
       this.isPostingComment = false;
       if (!isSucceded) {
         setTimeout(() => {
-          alert("Comment was not sent due to some error.");
+          alert("Comment was not sent due to some network error.");
         }, 100);
       }
     },
@@ -77,7 +118,10 @@ export default {
         const response = await fetch("https://localhost:7023/api/guest-book/comments", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userName: this.authorName, comment: this.comment }),
+          body: JSON.stringify({
+            userName: this.authorName ? this.authorName : "Guest",
+            comment: this.comment,
+          }),
         });
         if (!response.ok) {
           throw new Error("Error while posting comment.");
@@ -93,6 +137,13 @@ export default {
       this.authorName = "";
       this.comment = "";
       this.isFormActive = false;
+      this.v$.$reset();
+    },
+    applyValidityClass(vElement) {
+      return {
+        "is-valid": this.v$.$dirty && !vElement.$error,
+        "is-invalid": this.v$.$dirty && vElement.$error,
+      };
     },
   },
 };
