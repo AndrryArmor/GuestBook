@@ -1,26 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <TheHeading />
+  <GuestBook />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeading from "./components/TheHeading.vue";
+import GuestBook from "./components/GuestBook.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    TheHeading,
+    GuestBook,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body.body {
+  background-color: tan;
 }
 </style>

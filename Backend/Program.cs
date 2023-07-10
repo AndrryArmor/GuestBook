@@ -1,3 +1,6 @@
+using GuestBook.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace GuestBook
 {
     public class Program
@@ -7,6 +10,19 @@ namespace GuestBook
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddScoped<IGuestBookService, GuestBookService>();
+            builder.Services.AddSqlServer<GuestBookDbContext>(builder.Configuration.GetConnectionString("GuestBook"));
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("http://localhost:8080")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,6 +39,8 @@ namespace GuestBook
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
