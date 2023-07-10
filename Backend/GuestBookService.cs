@@ -18,6 +18,8 @@ namespace GuestBook
 
         public void AddUserComment(UserComment userComment)
         {
+            userComment.Id = default;
+            userComment.PublicationDate = default;
             _guestBookDbContext.Add(userComment);
             _guestBookDbContext.SaveChanges();
         }

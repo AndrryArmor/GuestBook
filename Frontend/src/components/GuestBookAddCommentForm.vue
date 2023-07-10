@@ -14,6 +14,7 @@
             class="form-control"
             :class="applyValidityClass(v$.userName)"
             id="comment-username"
+            maxlength="100"
             style="max-width: 15rem"
             :readonly="isPostingComment"
           />
@@ -104,16 +105,16 @@ export default {
       if (this.v$.$invalid) return;
 
       this.isPostingComment = true;
-      let isSucceded = await this.postComment();
+      let errorMessage = await this.postComment();
       this.isPostingComment = false;
-      if (!isSucceded) {
+      if (errorMessage) {
         setTimeout(() => {
-          alert("Comment was not sent due to some network error.");
+          alert(errorMessage);
         }, 100);
       }
     },
     async postComment() {
-      let isSucceded = true;
+      let errorMessage = "";
       try {
         const response = await fetch("https://localhost:7023/api/guest-book/comments", {
           method: "POST",
@@ -123,15 +124,25 @@ export default {
             comment: this.comment,
           }),
         });
-        if (!response.ok) {
-          throw new Error("Error while posting comment.");
+        if (response.status == 400) {
+          let errorResponse = await response.json();
+          let errors = [];
+          for (const key in errorResponse.errors) {
+            if (Object.hasOwnProperty.call(errorResponse.errors, key)) {
+              const element = errorResponse.errors[key];
+              errors.push(...element);
+            }
+          }
+          throw new Error(`${errorResponse.title}\n\nErrors:\n${errors.join("\n")}`);
+        } else if (!response.ok) {
+          throw new Error("Comment was not sent due to some network error.");
         }
         window.location.reload();
       } catch (error) {
         console.log(error);
-        isSucceded = false;
+        errorMessage = error.message;
       }
-      return isSucceded;
+      return errorMessage;
     },
     resetForm() {
       this.userName = "";

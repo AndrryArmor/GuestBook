@@ -21,7 +21,7 @@ export default {
       // Z specifies that the date is in UTC format
       let dateTime = new Date(this.publicationDate + "Z");
       // Time in HH:mm format
-      let time = dateTime.toLocaleTimeString([], { timeStyle: "short"});
+      let time = dateTime.toLocaleTimeString([], { timeStyle: "short" });
       let date = dateTime.toLocaleDateString();
       return `${time} ${date}`;
     },
@@ -32,5 +32,6 @@ export default {
 <style scoped>
 .comment {
   background-color: bisque;
+  overflow-wrap: break-word;
 }
 </style>
