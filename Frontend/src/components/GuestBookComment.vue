@@ -1,6 +1,6 @@
 <template>
   <div class="comment rounded-3 col-xxl-10 p-2">
-    <span class="h6">{{ authorName + " " }}</span>
+    <span class="h6">{{ userName + " " }}</span>
     <small>{{ publicationDateString }}</small>
     <br />
     <span> {{ comment }} </span>
@@ -11,7 +11,7 @@
 export default {
   name: "GuestBookComment",
   props: {
-    authorName: String,
+    userName: String,
     publicationDate: String,
     comment: String,
   },

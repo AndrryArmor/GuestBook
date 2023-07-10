@@ -7,18 +7,18 @@
       <h5 class="mb-2">New comment</h5>
       <form @submit.prevent="submitForm" @reset="resetForm" class="row g-2" novalidate>
         <fieldset class="col-12">
-          <label for="comment-author" class="form-label">Your name</label>
+          <label for="comment-username" class="form-label">Your name</label>
           <input
             type="text"
-            v-model="authorName"
+            v-model="userName"
             class="form-control"
-            :class="applyValidityClass(v$.authorName)"
-            id="comment-author"
+            :class="applyValidityClass(v$.userName)"
+            id="comment-username"
             style="max-width: 15rem"
             :readonly="isPostingComment"
           />
           <div class="invalid-feedback">
-            <div v-for="error of v$.authorName.$errors" :key="error.$uid">
+            <div v-for="error of v$.userName.$errors" :key="error.$uid">
               <small>{{ error.$message }}</small>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default {
   },
   data() {
     return {
-      authorName: "",
+      userName: "",
       comment: "",
       isFormActive: false,
       isPostingComment: false,
@@ -81,10 +81,10 @@ export default {
   },
   validations() {
     return {
-      authorName: {
-        required: helpers.withMessage("Author name must not be empty.", required),
+      userName: {
+        required: helpers.withMessage("Your name must not be empty.", required),
         minLength: helpers.withMessage(
-          ({ $params }) => `Author name must be at least ${$params.min} characters long.`,
+          ({ $params }) => `Your name must be at least ${$params.min} characters long.`,
           minLength(3)
         ),
       },
@@ -119,7 +119,7 @@ export default {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            userName: this.authorName ? this.authorName : "Guest",
+            userName: this.userName,
             comment: this.comment,
           }),
         });
@@ -134,7 +134,7 @@ export default {
       return isSucceded;
     },
     resetForm() {
-      this.authorName = "";
+      this.userName = "";
       this.comment = "";
       this.isFormActive = false;
       this.v$.$reset();

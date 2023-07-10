@@ -4,7 +4,7 @@
       <GuestBookAddCommentForm />
       <GuestBookComment
         v-for="userComment in userComments"
-        :authorName="userComment.userName"
+        :userName="userComment.userName"
         :publicationDate="userComment.publicationDate"
         :comment="userComment.comment"
       />
