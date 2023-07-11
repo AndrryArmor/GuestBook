@@ -27,6 +27,7 @@ It will create a `GuestBook` folder with app's content inside.
 
 Open the backend solution `GuestBook/Backend/GuestBook.sln` in Visual Studio and build it.
 ![Build Solution 'GuestBook' in Visual Studio](BuildBackend.png)
+
 This will install all necessary NuGet packages for the project.
 
 Open Package Manager Console (`Tools > NuGet Package Manager > Package Manager Console`) and run:
@@ -72,6 +73,7 @@ server: {
 #### Running
 
 To run backend, just start the solution:
+
 ![Alt text](RunBackend.png)
 
 It will automatically open a Swagger UI for backend API at `https://localhost:7023/swagger/index.html`
