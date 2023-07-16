@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GuestBook
+namespace GuestBook.Domain
 {
     public class UserComment
     {

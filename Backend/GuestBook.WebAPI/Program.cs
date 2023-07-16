@@ -1,7 +1,8 @@
-using GuestBook.Data;
+using GuestBook.Application;
+using GuestBook.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace GuestBook
+namespace GuestBook.WebAPI
 {
     public class Program
     {

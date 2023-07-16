@@ -1,6 +1,7 @@
-﻿using GuestBook.Data;
+﻿using GuestBook.Domain;
+using GuestBook.Persistence.Data;
 
-namespace GuestBook
+namespace GuestBook.Application
 {
     public class GuestBookService : IGuestBookService
     {

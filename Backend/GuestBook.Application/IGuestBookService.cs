@@ -1,4 +1,6 @@
-﻿namespace GuestBook
+﻿using GuestBook.Domain;
+
+namespace GuestBook.Application
 {
     public interface IGuestBookService
     {

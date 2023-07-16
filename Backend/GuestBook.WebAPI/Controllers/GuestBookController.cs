@@ -1,7 +1,8 @@
-using GuestBook.Data;
+using GuestBook.Application;
+using GuestBook.Domain;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GuestBook.Controllers
+namespace GuestBook.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/guest-book/comments")]
