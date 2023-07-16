@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuestBook", "GuestBook.csproj", "{70D01378-33AD-4BFE-BF66-8E41781B0654}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuestBook.WebAPI", "GuestBook.WebAPI\GuestBook.WebAPI.csproj", "{BECCB663-5708-447C-96D3-6DFD388940EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70D01378-33AD-4BFE-BF66-8E41781B0654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70D01378-33AD-4BFE-BF66-8E41781B0654}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70D01378-33AD-4BFE-BF66-8E41781B0654}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70D01378-33AD-4BFE-BF66-8E41781B0654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECCB663-5708-447C-96D3-6DFD388940EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECCB663-5708-447C-96D3-6DFD388940EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECCB663-5708-447C-96D3-6DFD388940EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECCB663-5708-447C-96D3-6DFD388940EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {74184CFB-5365-4F29-8348-941AA963EB98}
+		SolutionGuid = {4E7B9426-EB0A-448D-A6C5-B0FF4173EF8A}
 	EndGlobalSection
 EndGlobal
