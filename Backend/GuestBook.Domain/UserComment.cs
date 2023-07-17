@@ -2,11 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GuestBook.Domain
 {
-    public class UserComment
+    public class UserComment : Entity
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "Your name must not be empty.")]
         [MinLength(3, ErrorMessage = $"Your name must be at least 3 characters long.")]
         [MaxLength(100, ErrorMessage = $"Your name must not exceed 100 characters.")]

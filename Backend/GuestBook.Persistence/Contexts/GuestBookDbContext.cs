@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
-namespace GuestBook.Persistence.Data
+namespace GuestBook.Persistence.Contexts
 {
     public class GuestBookDbContext : DbContext
     {

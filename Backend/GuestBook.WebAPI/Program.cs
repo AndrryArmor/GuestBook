@@ -1,5 +1,6 @@
 using GuestBook.Application;
-using GuestBook.Persistence.Data;
+using GuestBook.Persistence;
+using GuestBook.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuestBook.WebAPI
@@ -13,7 +14,7 @@ namespace GuestBook.WebAPI
             // Add services to the container.
 
             builder.Services.AddScoped<IGuestBookService, GuestBookService>();
-            builder.Services.AddSqlServer<GuestBookDbContext>(builder.Configuration.GetConnectionString("GuestBook"));
+            builder.Services.AddInfrastructureLayer(builder.Configuration);
 
             builder.Services.AddCors(options =>
             {
