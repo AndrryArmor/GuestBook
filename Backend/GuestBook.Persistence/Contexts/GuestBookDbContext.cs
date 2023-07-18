@@ -1,4 +1,4 @@
-﻿using GuestBook.Domain;
+﻿using GuestBook.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 

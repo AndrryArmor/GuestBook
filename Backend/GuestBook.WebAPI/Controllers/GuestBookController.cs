@@ -1,5 +1,5 @@
-using GuestBook.Application;
-using GuestBook.Domain;
+using GuestBook.Application.Services;
+using GuestBook.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuestBook.WebAPI.Controllers

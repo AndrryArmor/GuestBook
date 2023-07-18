@@ -1,4 +1,4 @@
-﻿using GuestBook.Application.Interfaces.Repositories;
+﻿using GuestBook.Application.Repositories;
 using GuestBook.Domain;
 using GuestBook.Persistence.Contexts;
 using GuestBook.Persistence.Repositories;

@@ -1,4 +1,4 @@
-using GuestBook.Application;
+using GuestBook.Application.Services;
 using GuestBook.Persistence;
 using GuestBook.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;

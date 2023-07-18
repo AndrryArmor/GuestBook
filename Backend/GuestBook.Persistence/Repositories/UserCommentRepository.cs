@@ -1,5 +1,5 @@
-﻿using GuestBook.Application.Interfaces.Repositories;
-using GuestBook.Domain;
+﻿using GuestBook.Application.Repositories;
+using GuestBook.Domain.Entities;
 using GuestBook.Persistence.Contexts;
 using System;
 using System.Collections.Generic;

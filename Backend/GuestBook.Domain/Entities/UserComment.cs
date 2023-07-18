@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GuestBook.Domain
+namespace GuestBook.Domain.Entities
 {
     public class UserComment : Entity
     {

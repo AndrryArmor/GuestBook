@@ -1,6 +1,6 @@
-﻿using GuestBook.Domain;
+﻿using GuestBook.Domain.Entities;
 
-namespace GuestBook.Application
+namespace GuestBook.Application.Services
 {
     public interface IGuestBookService
     {

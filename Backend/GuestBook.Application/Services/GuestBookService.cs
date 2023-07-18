@@ -1,7 +1,7 @@
-﻿using GuestBook.Application.Interfaces.Repositories;
-using GuestBook.Domain;
+﻿using GuestBook.Application.Repositories;
+using GuestBook.Domain.Entities;
 
-namespace GuestBook.Application
+namespace GuestBook.Application.Services
 {
     public class GuestBookService : IGuestBookService
     {
@@ -21,7 +21,7 @@ namespace GuestBook.Application
         {
             userComment.Id = default;
             userComment.PublicationDate = default;
-            _unitOfWork.UserCommentRepository.Add(userComment);
+            _unitOfWork.UserCommentRepository.Create(userComment);
             _unitOfWork.SaveChanges();
         }
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuestBook.Application.Interfaces.Repositories
+namespace GuestBook.Application.Repositories
 {
     public interface IUnitOfWork
     {

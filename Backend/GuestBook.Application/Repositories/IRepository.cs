@@ -1,10 +1,10 @@
-﻿using GuestBook.Domain;
+﻿using GuestBook.Domain.Entities;
 
-namespace GuestBook.Application.Interfaces.Repositories
+namespace GuestBook.Application.Repositories
 {
     public interface IRepository<T> where T : Entity
     {
-        void Add(T entity);
+        void Create(T entity);
         T GetById(int id);
         void Update(T entity);
         void Delete(int id);

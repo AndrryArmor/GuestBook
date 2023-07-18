@@ -1,5 +1,5 @@
-﻿using GuestBook.Application.Interfaces.Repositories;
-using GuestBook.Domain;
+﻿using GuestBook.Application.Repositories;
+using GuestBook.Domain.Entities;
 using GuestBook.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +16,7 @@ namespace GuestBook.Persistence.Repositories
             _entities = _dbContext.Set<T>();
         }
 
-        public virtual void Add(T entity)
+        public virtual void Create(T entity)
         {
             _entities.Add(entity);
         }
