@@ -1,11 +1,4 @@
-﻿using GuestBook.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GuestBook.Application.Repositories
+﻿namespace GuestBook.Application.Repositories
 {
     public interface IUnitOfWork
     {

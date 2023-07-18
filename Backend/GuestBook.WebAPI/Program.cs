@@ -1,7 +1,5 @@
 using GuestBook.Application.Services;
 using GuestBook.Persistence;
-using GuestBook.Persistence.Contexts;
-using Microsoft.EntityFrameworkCore;
 
 namespace GuestBook.WebAPI
 {

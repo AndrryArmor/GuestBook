@@ -1,5 +1,7 @@
+using GuestBook.Application.RequestModels;
+using GuestBook.Application.ResponseModels;
 using GuestBook.Application.Services;
-using GuestBook.Domain.Entities;
+using GuestBook.Application.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuestBook.WebAPI.Controllers
@@ -16,15 +18,22 @@ namespace GuestBook.WebAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserComment> GetAllComments()
+        public IEnumerable<GetUserCommentsResponse> GetAllComments()
         {
             return _guestBookService.GetUserComments();
         }
 
         [HttpPost]
-        public void AddComment([FromBody] UserComment userComment)
+        public IActionResult CreateComment([FromBody] CreateUserCommentRequest userComment)
         {
-            _guestBookService.AddUserComment(userComment);
+            var validator = new CreateUserCommentRequestValidator(userComment);
+            if (!validator.IsRequestValid)
+            {
+                return BadRequest(new { Errors = validator.ValidationErrors });
+            }
+
+            _guestBookService.CreateUserComment(userComment);
+            return Ok();
         }
     }
 }

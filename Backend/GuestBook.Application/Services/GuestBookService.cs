@@ -1,4 +1,6 @@
 ﻿using GuestBook.Application.Repositories;
+using GuestBook.Application.RequestModels;
+using GuestBook.Application.ResponseModels;
 using GuestBook.Domain.Entities;
 
 namespace GuestBook.Application.Services
@@ -12,16 +14,19 @@ namespace GuestBook.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<UserComment> GetUserComments()
+        public IEnumerable<GetUserCommentsResponse> GetUserComments()
         {
-            return _unitOfWork.UserCommentRepository.GetAll();
+            return _unitOfWork.UserCommentRepository.GetAll()
+                .Select(uc => new GetUserCommentsResponse(uc.UserName, uc.PublicationDate, uc.Comment)); 
         }
 
-        public void AddUserComment(UserComment userComment)
+        public void CreateUserComment(CreateUserCommentRequest userComment)
         {
-            userComment.Id = default;
-            userComment.PublicationDate = default;
-            _unitOfWork.UserCommentRepository.Create(userComment);
+            _unitOfWork.UserCommentRepository.Create(new UserComment()
+            {
+                UserName = userComment.UserName,
+                Comment = userComment.Comment
+            });
             _unitOfWork.SaveChanges();
         }
     }

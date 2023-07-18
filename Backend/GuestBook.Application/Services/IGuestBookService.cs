@@ -1,10 +1,11 @@
-﻿using GuestBook.Domain.Entities;
+﻿using GuestBook.Application.RequestModels;
+using GuestBook.Application.ResponseModels;
 
 namespace GuestBook.Application.Services
 {
     public interface IGuestBookService
     {
-        void AddUserComment(UserComment userComment);
-        IEnumerable<UserComment> GetUserComments();
+        void CreateUserComment(CreateUserCommentRequest userComment);
+        IEnumerable<GetUserCommentsResponse> GetUserComments();
     }
 }
