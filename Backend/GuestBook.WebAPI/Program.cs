@@ -1,5 +1,7 @@
+using GuestBook.Application.Repositories;
 using GuestBook.Application.Services;
-using GuestBook.Persistence;
+using GuestBook.Persistence.Contexts;
+using GuestBook.Persistence.Repositories;
 
 namespace GuestBook.WebAPI
 {
@@ -12,7 +14,9 @@ namespace GuestBook.WebAPI
             // Add services to the container.
 
             builder.Services.AddScoped<IGuestBookService, GuestBookService>();
-            builder.Services.AddInfrastructureLayer(builder.Configuration);
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IUserCommentRepository, UserCommentRepository>();
+            builder.Services.AddSqlServer<GuestBookDbContext>(builder.Configuration.GetConnectionString("GuestBook"));
 
             builder.Services.AddCors(options =>
             {
