@@ -130,10 +130,10 @@ export default {
           for (const key in errorResponse.errors) {
             if (Object.hasOwnProperty.call(errorResponse.errors, key)) {
               const element = errorResponse.errors[key];
-              errors.push(...element);
+              errors.push(element);
             }
           }
-          throw new Error(`${errorResponse.title}\n\nErrors:\n${errors.join("\n")}`);
+          throw new Error(`One or more validation errors occured.\n\nErrors:\n${errors.join("\n")}`);
         } else if (!response.ok) {
           throw new Error("Comment was not sent due to some network error.");
         }
