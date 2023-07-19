@@ -29,25 +29,25 @@ namespace GuestBook.Application.Validators
             return validationErrors;
         }
 
-        private string ValidateNotEmpty(string? property, string propertyNameForError)
+        private static string ValidateNotEmpty(string? property, string propertyNameForError)
         {
             return string.IsNullOrWhiteSpace(property)
                 ? $"{propertyNameForError} must not be empty."
-                : "";
+                : string.Empty;
         }
 
-        private string ValidateMinLength(string? property, int minLength, string propertyNameForError)
+        private static string ValidateMinLength(string? property, int minLength, string propertyNameForError)
         {
             return (property?.Length ?? 0) < minLength
                 ? $"{propertyNameForError} must be at least {minLength} characters long."
-                : "";
+                : string.Empty;
         }
 
-        private string ValidateMaxLength(string? property, int maxLength, string propertyNameForError)
+        private static string ValidateMaxLength(string? property, int maxLength, string propertyNameForError)
         {
             return (property?.Length ?? 0) > maxLength
                 ? $"{propertyNameForError} must not exceed {maxLength} characters."
-                : "";
+                : string.Empty;
         }
     }
 }
