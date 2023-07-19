@@ -24,8 +24,8 @@ namespace GuestBook.Application.Services
         {
             _unitOfWork.UserCommentRepository.Create(new UserComment()
             {
-                UserName = userComment.UserName,
-                Comment = userComment.Comment
+                UserName = userComment.UserName!,
+                Comment = userComment.Comment!
             });
             _unitOfWork.SaveChanges();
         }
