@@ -18,9 +18,16 @@ namespace GuestBook.WebAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<GetUserCommentsResponse> GetAllComments()
+        public ActionResult<IEnumerable<GetUserCommentsResponse>> GetAllComments()
         {
-            return _guestBookService.GetUserComments();
+            try
+            {
+                return _guestBookService.GetUserComments().ToList();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost]
@@ -32,8 +39,15 @@ namespace GuestBook.WebAPI.Controllers
                 return BadRequest(new { Errors = validator.ValidationErrors });
             }
 
-            _guestBookService.CreateUserComment(userComment);
-            return Ok();
+            try
+            {
+                _guestBookService.CreateUserComment(userComment);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }
