@@ -16,7 +16,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "./assets/_variables.scss";
+
 body.body {
   background-color: tan;
 }

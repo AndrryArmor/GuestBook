@@ -160,7 +160,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "../assets/_variables.scss";
+
 .comment {
   background-color: bisque;
 }
