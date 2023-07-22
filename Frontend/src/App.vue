@@ -19,7 +19,16 @@ export default {
 <style lang="scss">
 @import "./assets/_variables.scss";
 
-body.body {
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, "Segoe UI", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: black;
   background-color: tan;
 }
 </style>
