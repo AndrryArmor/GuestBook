@@ -1,8 +1,6 @@
 <template>
-  <div class="heading-container">
-    <div class="heading">
-      <h1>Guest Book</h1>
-    </div>
+  <div class="heading">
+    <h1>Guest Book</h1>
   </div>
 </template>
 
@@ -15,15 +13,13 @@ export default {
 <style scoped lang="scss">
 @import "../assets/_variables.scss";
 
-.heading-container {
+.heading {
   display: flex;
   justify-content: center;
 }
 
-.heading-container .heading {
-  display: flex;
-  justify-content: center;
-  width: $width-container;
-  padding: 0.5rem 0rem;
+.heading h1 {
+  margin: 0.5rem;
+  font-weight: 500;
 }
 </style>
