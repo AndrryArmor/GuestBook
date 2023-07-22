@@ -1,12 +1,12 @@
 <template>
-  <div class="comment rounded-3 col-xxl-10 p-2">
-    <button v-if="!isFormActive" @click="isFormActive = true" class="btn btn-success">
+  <div class="comment">
+    <button v-if="!isFormActive" @click="isFormActive = true" class="button button-success">
       Add new comment
     </button>
     <template v-else>
-      <h5 class="mb-2">New comment</h5>
-      <form @submit.prevent="submitForm" @reset="resetForm" class="row g-2" novalidate>
-        <fieldset class="col-12">
+      <h5>New comment</h5>
+      <form @submit.prevent="submitForm" @reset="resetForm" class="form" novalidate>
+        <fieldset>
           <label for="comment-username" class="form-label">Your name</label>
           <input
             type="text"
@@ -24,7 +24,7 @@
             </div>
           </div>
         </fieldset>
-        <fieldset class="col-12">
+        <fieldset>
           <label for="comment-text" class="form-label">Comment</label>
           <textarea
             v-model="comment"
@@ -41,21 +41,15 @@
             </div>
           </div>
         </fieldset>
-        <fieldset :disabled="isPostingComment" class="col-12">
-          <div class="row row-cols-auto g-2">
-            <div class="col">
-              <button type="submit" class="btn btn-success">
-                <template v-if="!isPostingComment">Add comment</template>
-                <template v-else>
-                  <span class="spinner-border spinner-border-sm" role="status"></span>
-                  Loading...
-                </template>
-              </button>
-            </div>
-            <div class="col">
-              <button type="reset" class="btn btn-secondary">Cancel</button>
-            </div>
-          </div>
+        <fieldset :disabled="isPostingComment" class="form-buttons">
+          <button type="submit" class="button button-success">
+            <template v-if="!isPostingComment">Add comment</template>
+            <template v-else>
+              <span class="spinner-border spinner-border-sm" role="status"></span>
+              Loading...
+            </template>
+          </button>
+          <button type="reset" class="button button-secondary">Cancel</button>
         </fieldset>
       </form>
     </template>
@@ -133,7 +127,9 @@ export default {
               errors.push(element);
             }
           }
-          throw new Error(`One or more validation errors occured.\n\nErrors:\n${errors.join("\n")}`);
+          throw new Error(
+            `One or more validation errors occured.\n\nErrors:\n${errors.join("\n")}`
+          );
         } else if (!response.ok) {
           throw new Error("Comment was not sent due to some network error.");
         }
@@ -163,7 +159,54 @@ export default {
 <style scoped lang="scss">
 @import "../assets/_variables.scss";
 
+$green-button: #198754;
+$grey-button: #6c757d;
+
 .comment {
   background-color: bisque;
+  max-width: $width-container;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.comment .form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comment .form .form-label {
+  margin-bottom: 0.5rem;
+}
+
+.comment .form .form-control {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.375rem;
+  }
+
+.comment .form .form-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.comment .button {
+  border: 1px solid;
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.comment .button.button-success {
+  color: white;
+  background-color: $green-button;
+  border-color: $green-button;
+}
+
+.comment .button.button-secondary {
+  color: white;
+  background-color: $grey-button;
+  border-color: $grey-button;
 }
 </style>

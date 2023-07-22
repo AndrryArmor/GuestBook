@@ -1,14 +1,12 @@
 <template>
-  <div class="container-xl">
-    <div class="row row-cols-1 g-1 justify-content-center">
-      <GuestBookAddCommentForm />
-      <GuestBookComment
-        v-for="userComment in userComments"
-        :userName="userComment.userName"
-        :publicationDate="userComment.publicationDate"
-        :comment="userComment.comment"
-      />
-    </div>
+  <div class="container">
+    <GuestBookAddCommentForm />
+    <GuestBookComment
+      v-for="userComment in userComments"
+      :userName="userComment.userName"
+      :publicationDate="userComment.publicationDate"
+      :comment="userComment.comment"
+    />
   </div>
 </template>
 
@@ -51,4 +49,13 @@ export default {
 
 <style scoped lang="scss">
 @import "../assets/_variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0rem 0.5rem;
+  margin-bottom: 0.25rem;
+}
 </style>
