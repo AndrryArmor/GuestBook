@@ -1,4 +1,5 @@
-﻿using GuestBook.Application.Repositories;
+﻿using GuestBook.Application.Exceptions;
+using GuestBook.Application.Repositories;
 using GuestBook.Domain.Entities;
 using GuestBook.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ namespace GuestBook.Persistence.Repositories
 
         public virtual T GetById(int id)
         {
-            return _entities.Find(id);
+            return _entities.Find(id) ?? throw new EntityNotFoundException(id, typeof(T));
         }
 
         public virtual void Update(T entity)
@@ -34,7 +35,14 @@ namespace GuestBook.Persistence.Repositories
         public virtual void Delete(int id)
         {
             var entityToDelete = _entities.Find(id);
-            _entities.Remove(entityToDelete);
+            if (entityToDelete != null)
+            {
+                _entities.Remove(entityToDelete);
+            }
+            else
+            {
+                throw new EntityNotFoundException(id, typeof(T));
+            }
         }
 
         public virtual IEnumerable<T> GetAll()
