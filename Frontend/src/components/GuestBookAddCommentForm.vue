@@ -1,11 +1,11 @@
 <template>
   <div class="comment">
-    <button v-if="!isFormActive" @click="isFormActive = true" class="button button-success">
+    <button v-if="!isFormActive" @click="isFormActive = true" class="button-success">
       Add new comment
     </button>
     <template v-else>
-      <h5>New comment</h5>
-      <form @submit.prevent="submitForm" @reset="resetForm" class="form" novalidate>
+      <h3 class="heading">New comment</h3>
+      <form @submit.prevent="submitForm" @reset="resetForm" novalidate>
         <fieldset>
           <label for="comment-username" class="form-label">Your name</label>
           <input
@@ -42,14 +42,14 @@
           </div>
         </fieldset>
         <fieldset :disabled="isPostingComment" class="form-buttons">
-          <button type="submit" class="button button-success">
+          <button type="submit" class="button-success">
             <template v-if="!isPostingComment">Add comment</template>
             <template v-else>
-              <span class="spinner-border spinner-border-sm" role="status"></span>
+              <span class="spinner"></span>
               Loading...
             </template>
           </button>
-          <button type="reset" class="button button-secondary">Cancel</button>
+          <button type="reset" class="button-secondary">Cancel</button>
         </fieldset>
       </form>
     </template>
@@ -148,8 +148,8 @@ export default {
     },
     applyValidityClass(vElement) {
       return {
-        "is-valid": this.v$.$dirty && !vElement.$error,
-        "is-invalid": this.v$.$dirty && vElement.$error,
+        "valid": this.v$.$dirty && !vElement.$error,
+        "invalid": this.v$.$dirty && vElement.$error,
       };
     },
   },
@@ -159,8 +159,9 @@ export default {
 <style scoped lang="scss">
 @import "../assets/_variables.scss";
 
-$green-button: #198754;
-$grey-button: #6c757d;
+$green: #198756;
+$red: #dc3545;
+$grey: #6c757d;
 
 .comment {
   background-color: bisque;
@@ -170,43 +171,112 @@ $grey-button: #6c757d;
   padding: 0.5rem;
 }
 
-.comment .form {
+.comment .heading {
+  margin: 0rem 0rem 0.5rem;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.comment form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.comment .form .form-label {
+.comment form fieldset {
+  border: none;
+  margin: 0rem;
+  padding: 0rem;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.comment form .form-label {
   margin-bottom: 0.5rem;
 }
 
-.comment .form .form-control {
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    margin-bottom: 0.5rem;
-    border-radius: 0.375rem;
-  }
+.comment form .form-control {
+  border: 1px solid lightgray;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  line-height: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
 
-.comment .form .form-buttons {
-  display: flex;
-  flex-wrap: wrap;
+.comment form .form-control:focus {
+  outline: 0;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.comment form .form-control.valid {
+  outline: 0;
+  border-color: $green;
+}
+
+.comment form .form-control.valid:focus {
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.comment form .form-control.invalid {
+  outline: 0;
+  border-color: $red;
+}
+
+.comment form .form-control.invalid + .invalid-feedback {
+  color: $red;
+}
+
+.comment form .form-control.invalid:focus {
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.comment form textarea.form-control {
+  resize: vertical;
+}
+
+.comment form .form-buttons {
+  flex-direction: row;
   gap: 0.5rem;
 }
-.comment .button {
+.comment button {
   border: 1px solid;
   border-radius: 0.375rem;
   padding: 0.375rem 0.75rem;
+  line-height: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
 }
 
-.comment .button.button-success {
+.comment button.button-success {
   color: white;
-  background-color: $green-button;
-  border-color: $green-button;
+  background-color: $green;
+  border-color: $green;
 }
 
-.comment .button.button-secondary {
+.comment button.button-secondary {
   color: white;
-  background-color: $grey-button;
-  border-color: $grey-button;
+  background-color: $grey;
+  border-color: $grey;
+}
+
+.comment .spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.125rem;
+  border: 0.2em solid currentColor;
+  border-radius: 50%;
+  border-right-color: transparent;
+  animation: 0.75s linear infinite spinner-border;
+}
+
+@keyframes spinner-border {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
