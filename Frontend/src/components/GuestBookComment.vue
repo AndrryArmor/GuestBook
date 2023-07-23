@@ -1,6 +1,6 @@
 <template>
-  <div class="comment rounded-3 col-xxl-10 p-2">
-    <span class="h6">{{ userName + " " }}</span>
+  <div class="comment">
+    <span class="username">{{ userName + " " }}</span>
     <small>{{ publicationDateString }}</small>
     <br />
     <span> {{ comment }} </span>
@@ -29,9 +29,19 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "../assets/_variables.scss";
+
 .comment {
   background-color: bisque;
   overflow-wrap: break-word;
+  width: 100%;
+  max-width: $width-container;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.comment .username {
+   font-weight: 500;
 }
 </style>

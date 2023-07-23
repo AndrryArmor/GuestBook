@@ -1,7 +1,9 @@
-using GuestBook.Data;
+using GuestBook.Application.RequestModels;
+using GuestBook.Application.Services;
+using GuestBook.Application.Validators;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GuestBook.Controllers
+namespace GuestBook.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/guest-book/comments")]
@@ -15,15 +17,37 @@ namespace GuestBook.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserComment> GetAllComments()
+        public IActionResult GetAllComments()
         {
-            return _guestBookService.GetUserComments();
+            try
+            {
+                var userComments = _guestBookService.GetUserComments();
+                return Ok(userComments);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [HttpPost]
-        public void AddComment([FromBody] UserComment userComment)
+        public IActionResult CreateComment([FromBody] CreateUserCommentRequest userComment)
         {
-            _guestBookService.AddUserComment(userComment);
+            try
+            {
+                var validator = new CreateUserCommentRequestValidator(userComment);
+                if (!validator.IsRequestValid)
+                {
+                    return BadRequest(new { Errors = validator.ValidationErrors });
+                }
+
+                _guestBookService.CreateUserComment(userComment);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

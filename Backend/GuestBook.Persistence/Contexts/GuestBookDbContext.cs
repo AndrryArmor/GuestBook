@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
+﻿using GuestBook.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace GuestBook.Data
+namespace GuestBook.Persistence.Contexts
 {
     public class GuestBookDbContext : DbContext
     {
